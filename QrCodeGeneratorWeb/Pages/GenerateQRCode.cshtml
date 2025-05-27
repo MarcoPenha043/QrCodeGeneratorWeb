@@ -1,0 +1,26 @@
+﻿@page
+@using QrCodeGeneratorWeb.Pages
+using QRCoder;
+@using System.IO
+using QRCoder.Drawing;
+@model GenerateQRCodeModel
+@{
+    ViewData["Title"] = "Gerador de QR Code";
+}
+
+<h1>Gerador de QR Code</h1>
+
+<form method="post">
+    <label asp-for="InputText">Texto ou URL:</label><br />
+    <input asp-for="InputText" style="width: 300px;" required />
+    <br /><br />
+    <button type="submit">Gerar QR Code</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.QrCodeImageBase64))
+{
+    <div>
+        <h3>QR Code Gerado:</h3>
+        <img src="data:image/png;base64,@Model.QrCodeImageBase64" alt="QR Code" />
+    </div>
+}
